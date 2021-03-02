@@ -984,10 +984,11 @@ define-command -hidden lsp-show-document-symbol -params 2 -docstring "Render doc
     }
 }
 
-define-command -hidden lsp-next-match -params 1 -docstring %{
-    buffile
-    Jump to next match in grep filetype buffile
-} %{
+define-command lsp-next-location -params 1 -docstring %{
+    lsp-next-location <bufname>
+    Jump to next match in the given grep-like buffer, usually one of
+    *diagnostics* *goto* *grep* *implementations* *lint-output* *make* *references* *symbols*
+} -buffer-completion %{
     evaluate-commands -try-client %opt{jumpclient} %{
         buffer %arg{1}
         execute-keys "ge %opt{grep_current_line}g<a-l> /^[^:]+:\d+:<ret>"
@@ -1001,10 +1002,11 @@ define-command -hidden lsp-next-match -params 1 -docstring %{
     }
 }
 
-define-command -hidden lsp-previous-match -params 1 -docstring %{
-    buffile
-    Jump to previous match in grep filetype buffile
-} %{
+define-command lsp-previous-location -params 1 -docstring %{
+    lsp-previous-location <bufname>
+    Jump to previous match in the given grep-like buffer, usually one of
+    *diagnostics* *goto* *grep* *implementations* *lint-output* *make* *references* *symbols*
+} -buffer-completion %{
     evaluate-commands -try-client %opt{jumpclient} %{
         buffer %arg{1}
         execute-keys "ge %opt{grep_current_line}g<a-h> <a-/>^[^:]+:\d+:<ret>"
@@ -1654,17 +1656,17 @@ define-command -hidden lsp-diagnostics-open-error -params 4 %{
 
 # Deprecated commands.
 define-command lsp-symbols-next-match -docstring 'Jump to the next symbols match' %{
-    lsp-next-match '*symbols*'
+    lsp-next-location '*symbols*'
 }
 
 define-command lsp-symbols-previous-match -docstring 'Jump to the previous symbols match' %{
-    lsp-previous-match '*symbols*'
+    lsp-previous-location '*symbols*'
 }
 
 define-command lsp-goto-next-match -docstring 'Jump to the next goto match' %{
-    lsp-next-match '*goto*'
+    lsp-next-location '*goto*'
 }
 
 define-command lsp-goto-previous-match -docstring 'Jump to the previous goto match' %{
-    lsp-previous-match '*goto*'
+    lsp-previous-location '*goto*'
 }
