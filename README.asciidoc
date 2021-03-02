@@ -134,7 +134,7 @@ Either way you get:
 * `lsp-references` command to find references for a symbol under the main cursor, mapped to `gr` by default
 ** for the previous five commands, `\*goto*` buffer has `lsp-goto` filetype so you can press `<ret>` on a line or use the `lsp-jump` command
 * `lsp-find-error` command to jump to the next or previous error in the file
-** `lsp-references-previous-match` and `lsp-references-next-match` to navigate between references
+* `lsp-next-location` and `lsp-previous-location` to jump to the next or previous location listed in a buffer with the `lsp-goto` filetype. These also work for buffers `\*grep*`, `\*lint*` and `\*make*`
 * `lsp-highlight-references` command to highlight references in current buffer for a symbol under the main cursor with `Reference` face (which is equal to `MatchingChar` face by default)
 * `lsp-document-symbol` command to list current buffer's symbols
 * `lsp-workspace-symbol` command to list project-wide symbols matching the query
