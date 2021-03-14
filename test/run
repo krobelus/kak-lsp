@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+root="$(realpath "$(dirname "$0")"/..)"
+
+echo "# Testing kak-lsp $(command -v kak-lsp)"
+
+test="$(dirname "$0")"
+for file in $(
+	find "${@:-"$test"}" -type f -perm /u+x \
+		-name '*.sh' # This is only to exclude ourselves.
+)
+do
+	echo ci/littlecheck.py "$file"
+	"$test"/../ci/littlecheck.py "$file"
+done
