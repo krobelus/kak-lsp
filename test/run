@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+echo "# Testing kak-lsp $(command -v kak-lsp)"
+echo "# Available language servers: $(command -v clangd rust-analyzer || :)"
+
+test="$(dirname "$0")"
+for file in $(
+	find "${@:-"$test"}" -type f | grep -vE '/(lib.sh|run)$'
+)
+do
+	echo ci/littlecheck.py "$file"
+	"$test"/../ci/littlecheck.py "$file"
+done
